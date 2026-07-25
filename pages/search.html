@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索</title>
+    <style id="theme-vars">
+:root {
+  --tire-background: #111318;
+  --tire-foreground: #f0f0f5;
+  --tire-card: #1a1d25;
+  --tire-card-foreground: #f0f0f5;
+  --tire-popover: #22252e;
+  --tire-popover-foreground: #f0f0f5;
+  --tire-primary: #f97316;
+  --tire-primary-foreground: #ffffff;
+  --tire-muted: #272a35;
+  --tire-muted-foreground: #9ca3af;
+  --tire-border: #2d3140;
+  --tire-input: #1e2130;
+  --tire-ring: #f97316;
+  --tire-radius-sm: 6px;
+  --tire-radius-md: 10px;
+  --tire-radius-lg: 16px;
+  --tire-state-success: #22c55e;
+  --tire-state-warning: #eab308;
+  --tire-state-error: #ef4444;
+  --tire-state-info: #3b82f6;
+}
+
+/* Semantic token fallback */
+*, *::before, *::after {
+  --background: var(--tire-background);
+  --foreground: var(--tire-foreground);
+  --card: var(--tire-card);
+  --card-foreground: var(--tire-card-foreground);
+  --popover: var(--tire-popover);
+  --popover-foreground: var(--tire-popover-foreground);
+  --primary: var(--tire-primary);
+  --primary-foreground: var(--tire-primary-foreground);
+  --muted: var(--tire-muted);
+  --muted-foreground: var(--tire-muted-foreground);
+  --border: var(--tire-border);
+  --input: var(--tire-input);
+  --ring: var(--tire-ring);
+  --radius-sm: var(--tire-radius-sm);
+  --radius-md: var(--tire-radius-md);
+  --radius-lg: var(--tire-radius-lg);
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--tire-background);
+  color: var(--tire-foreground);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1 { font-size: 1.75rem; font-weight: 700; line-height: 1.3; }
+h2 { font-size: 1.375rem; font-weight: 600; line-height: 1.35; }
+h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.4; }
+
+/* Safe area for iPhone notch */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--tire-background);
+    --color-foreground: var(--tire-foreground);
+    --color-card: var(--tire-card);
+    --color-card-foreground: var(--tire-card-foreground);
+    --color-popover: var(--tire-popover);
+    --color-popover-foreground: var(--tire-popover-foreground);
+    --color-primary: var(--tire-primary);
+    --color-primary-foreground: var(--tire-primary-foreground);
+    --color-muted: var(--tire-muted);
+    --color-muted-foreground: var(--tire-muted-foreground);
+    --color-border: var(--tire-border);
+    --color-input: var(--tire-input);
+    --color-ring: var(--tire-ring);
+    --radius-sm: var(--tire-radius-sm);
+    --radius-md: var(--tire-radius-md);
+    --radius-lg: var(--tire-radius-lg);
+  }
+  @layer base {
+    body { background: var(--tire-background); color: var(--tire-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--tire-background); }
+      .text-background { color: var(--tire-background); }
+      .border-background { border-color: var(--tire-background); }
+      .ring-background { --tw-ring-color: var(--tire-background); }
+      .bg-foreground { background-color: var(--tire-foreground); }
+      .text-foreground { color: var(--tire-foreground); }
+      .border-foreground { border-color: var(--tire-foreground); }
+      .ring-foreground { --tw-ring-color: var(--tire-foreground); }
+      .bg-card { background-color: var(--tire-card); }
+      .text-card { color: var(--tire-card); }
+      .border-card { border-color: var(--tire-card); }
+      .ring-card { --tw-ring-color: var(--tire-card); }
+      .bg-card-foreground { background-color: var(--tire-card-foreground); }
+      .text-card-foreground { color: var(--tire-card-foreground); }
+      .border-card-foreground { border-color: var(--tire-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--tire-card-foreground); }
+      .bg-popover { background-color: var(--tire-popover); }
+      .text-popover { color: var(--tire-popover); }
+      .border-popover { border-color: var(--tire-popover); }
+      .ring-popover { --tw-ring-color: var(--tire-popover); }
+      .bg-popover-foreground { background-color: var(--tire-popover-foreground); }
+      .text-popover-foreground { color: var(--tire-popover-foreground); }
+      .border-popover-foreground { border-color: var(--tire-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--tire-popover-foreground); }
+      .bg-primary { background-color: var(--tire-primary); }
+      .text-primary { color: var(--tire-primary); }
+      .border-primary { border-color: var(--tire-primary); }
+      .ring-primary { --tw-ring-color: var(--tire-primary); }
+      .bg-primary-foreground { background-color: var(--tire-primary-foreground); }
+      .text-primary-foreground { color: var(--tire-primary-foreground); }
+      .border-primary-foreground { border-color: var(--tire-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--tire-primary-foreground); }
+      .bg-muted { background-color: var(--tire-muted); }
+      .text-muted { color: var(--tire-muted); }
+      .border-muted { border-color: var(--tire-muted); }
+      .ring-muted { --tw-ring-color: var(--tire-muted); }
+      .bg-muted-foreground { background-color: var(--tire-muted-foreground); }
+      .text-muted-foreground { color: var(--tire-muted-foreground); }
+      .border-muted-foreground { border-color: var(--tire-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--tire-muted-foreground); }
+      .bg-border { background-color: var(--tire-border); }
+      .text-border { color: var(--tire-border); }
+      .border-border { border-color: var(--tire-border); }
+      .ring-border { --tw-ring-color: var(--tire-border); }
+      .bg-input { background-color: var(--tire-input); }
+      .text-input { color: var(--tire-input); }
+      .border-input { border-color: var(--tire-input); }
+      .ring-input { --tw-ring-color: var(--tire-input); }
+      .bg-ring { background-color: var(--tire-ring); }
+      .text-ring { color: var(--tire-ring); }
+      .border-ring { border-color: var(--tire-ring); }
+      .ring-ring { --tw-ring-color: var(--tire-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="pb-20">
+      <!-- Search Bar -->
+      <div class="sticky top-0 z-30 bg-[var(--tire-background)]/95 backdrop-blur px-4 pt-3 pb-2">
+        <div class="relative">
+          <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--tire-muted-foreground)] pointer-events-none"></i>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="输入车牌号搜索，如 鲁Q"
+            enterkeyhint="search"
+            class="w-full min-h-[48px] pl-11 pr-10 bg-[var(--tire-input)] border border-[var(--tire-border)] rounded-full text-[var(--tire-foreground)] placeholder:text-[var(--tire-muted-foreground)] text-[16px] focus:outline-none focus:border-[var(--tire-primary)] focus:ring-1 focus:ring-[var(--tire-ring)] transition-colors"
+          >
+          <button
+            id="clearBtn"
+            class="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full text-[var(--tire-muted-foreground)] hover:text-[var(--tire-foreground)] hover:bg-[var(--tire-muted)] transition-colors hidden"
+            aria-label="清除搜索"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Content area: empty state, recent vehicles, or search results -->
+      <div id="searchContent" class="px-4 pt-2">
+        <!-- Default empty state (no query) -->
+        <div id="emptyStateNoQuery" class="py-16 text-center">
+          <i data-lucide="search" class="w-12 h-12 text-[var(--tire-muted-foreground)] mx-auto mb-4 opacity-40"></i>
+          <p class="text-[var(--tire-muted-foreground)] text-sm mb-6">输入车牌号或姓名查看历史记录</p>
+        </div>
+
+        <!-- Recent vehicles (no query) -->
+        <div id="recentVehicles" class="hidden">
+          <h3 class="text-sm font-semibold text-[var(--tire-muted-foreground)] mb-3">最近服务车辆</h3>
+          <div id="recentVehiclesList" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- No results state -->
+        <div id="emptyStateNoResults" class="hidden py-16 text-center">
+          <i data-lucide="search-x" class="w-12 h-12 text-[var(--tire-muted-foreground)] mx-auto mb-4 opacity-40"></i>
+          <p class="text-[var(--tire-foreground)] text-sm font-medium mb-1">未找到相关记录</p>
+          <p class="text-[var(--tire-muted-foreground)] text-xs">请检查车牌号是否正确</p>
+        </div>
+
+        <!-- Results summary card -->
+        <div id="resultsSummary" class="hidden mb-3 bg-[var(--tire-card)] border border-[var(--tire-border)] rounded-[var(--tire-radius-lg)] p-4">
+          <h3 id="summaryVehicle" class="text-lg font-bold text-[var(--tire-foreground)] truncate"></h3>
+          <div class="grid grid-cols-3 gap-2 mt-3">
+            <div>
+              <p class="text-[11px] text-[var(--tire-muted-foreground)]">总收入</p>
+              <p id="summaryIncome" class="text-base font-bold text-[var(--tire-state-success)] whitespace-nowrap mt-0.5">¥0</p>
+            </div>
+            <div>
+              <p class="text-[11px] text-[var(--tire-muted-foreground)]">未收款</p>
+              <p id="summaryPending" class="text-base font-bold text-[var(--tire-state-error)] whitespace-nowrap mt-0.5">¥0</p>
+            </div>
+            <div>
+              <p class="text-[11px] text-[var(--tire-muted-foreground)]">总记录</p>
+              <p id="summaryCount" class="text-base font-bold text-[var(--tire-foreground)] whitespace-nowrap mt-0.5">0</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- History list -->
+        <div id="historyList" class="space-y-2"></div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <nav data-mobile-nav="global" class="fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50">
+        <div class="w-full max-w-md mx-auto grid grid-cols-4 h-full">
+          <a href="home.html" data-nav-key="home" data-dom-id="nav-home" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+            <i data-lucide="layout-dashboard" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+          </a>
+          <a href="add-record.html" data-nav-key="add-record" data-dom-id="nav-add-record" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+            <i data-lucide="plus-circle" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">记账</span>
+          </a>
+          <a href="debts.html" data-nav-key="debts" data-dom-id="nav-debts" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+            <i data-lucide="file-text" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">欠款</span>
+          </a>
+          <a href="search.html" data-nav-key="search" data-active="true" data-dom-id="nav-search" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]">
+            <i data-lucide="search" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">搜索</span>
+          </a>
+        </div>
+      </nav>
+    </main>
+
+    <script>
+    lucide.createIcons();
+
+    (function() {
+      var searchInput = document.getElementById('searchInput');
+      var clearBtn = document.getElementById('clearBtn');
+      var emptyStateNoQuery = document.getElementById('emptyStateNoQuery');
+      var recentVehicles = document.getElementById('recentVehicles');
+      var recentVehiclesList = document.getElementById('recentVehiclesList');
+      var emptyStateNoResults = document.getElementById('emptyStateNoResults');
+      var resultsSummary = document.getElementById('resultsSummary');
+      var summaryVehicle = document.getElementById('summaryVehicle');
+      var summaryIncome = document.getElementById('summaryIncome');
+      var summaryPending = document.getElementById('summaryPending');
+      var summaryCount = document.getElementById('summaryCount');
+      var historyList = document.getElementById('historyList');
+
+      var debounceTimer = null;
+
+      function getRecords() {
+        try {
+          return JSON.parse(localStorage.getItem('tire_records') || '[]');
+        } catch(e) {
+          return [];
+        }
+      }
+
+      function formatAmount(n) {
+        return '\u00A5' + Number(n).toFixed(2);
+      }
+
+      function highlightMatch(text, query) {
+        if (!query) return text;
+        var lowerText = text.toLowerCase();
+        var lowerQuery = query.toLowerCase();
+        var idx = lowerText.indexOf(lowerQuery);
+        if (idx === -1) return text;
+        return text.substring(0, idx) +
+          '<span class="text-[var(--tire-primary)] font-semibold">' +
+          text.substring(idx, idx + query.length) +
+          '</span>' +
+          text.substring(idx + query.length);
+      }
+
+      function formatDate(dateStr) {
+        var d = new Date(dateStr);
+        var m = String(d.getMonth() + 1).padStart(2, '0');
+        var day = String(d.getDate()).padStart(2, '0');
+        var h = String(d.getHours()).padStart(2, '0');
+        var min = String(d.getMinutes()).padStart(2, '0');
+        return m + '-' + day + ' ' + h + ':' + min;
+      }
+
+      function getCategoryIcon(category) {
+        var icons = {
+          '\u8865\u80ce': 'circle-dot',
+          '\u4fee\u80ce': 'wrench',
+          '\u52a8\u5e73\u8861': 'gauge',
+          '\u56db\u8f6e\u5b9a\u4f4d': 'crosshair',
+          '\u6362\u80ce': 'refresh-cw',
+          '\u6c5f\u6cb9\u5668': 'droplets',
+          '\u5176\u4ed6': 'tag',
+          '\u9910\u996e': 'utensils',
+          '\u4f4f\u5bbf': 'bed-double',
+          '\u52a0\u6cb9': 'fuel',
+          '\u8fc7\u8def\u8d39': 'route',
+          '\u4fee\u7406': 'settings',
+          '\u5de5\u5177': 'hammer'
+        };
+        return icons[category] || 'tag';
+      }
+
+      function getRecentVehicles(records) {
+        var vehicleSet = [];
+        var seen = {};
+        var incomeRecords = records.filter(function(r) { return r.type === 'income' && r.vehicle; });
+        incomeRecords.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+        for (var i = 0; i < incomeRecords.length; i++) {
+          var v = incomeRecords[i].vehicle;
+          if (!seen[v]) {
+            seen[v] = true;
+            vehicleSet.push(v);
+          }
+          if (vehicleSet.length >= 12) break;
+        }
+        return vehicleSet;
+      }
+
+      function showNoQuery() {
+        var records = getRecords();
+        var vehicles = getRecentVehicles(records);
+
+        emptyStateNoQuery.classList.remove('hidden');
+        recentVehicles.classList.add('hidden');
+        emptyStateNoResults.classList.add('hidden');
+        resultsSummary.classList.add('hidden');
+        historyList.innerHTML = '';
+
+        if (vehicles.length > 0) {
+          recentVehicles.classList.remove('hidden');
+          recentVehiclesList.innerHTML = '';
+          vehicles.forEach(function(v) {
+            var chip = document.createElement('button');
+            chip.className = 'inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[var(--tire-card)] border border-[var(--tire-border)] text-[var(--tire-foreground)] text-sm whitespace-nowrap hover:border-[var(--tire-primary)] transition-colors active:scale-95';
+            chip.textContent = v;
+            chip.addEventListener('click', function() {
+              searchInput.value = v;
+              handleSearch(v);
+              clearBtn.classList.remove('hidden');
+            });
+            recentVehiclesList.appendChild(chip);
+          });
+        }
+      }
+
+      function handleSearch(query) {
+        query = (query || '').trim();
+        if (!query) {
+          showNoQuery();
+          return;
+        }
+
+        var records = getRecords();
+        var lowerQuery = query.toLowerCase();
+
+        // Match income records by vehicle (fuzzy match)
+        var matchedIncome = records.filter(function(r) {
+          return r.type === 'income' && r.vehicle && r.vehicle.toLowerCase().indexOf(lowerQuery) !== -1;
+        });
+
+        if (matchedIncome.length === 0) {
+          emptyStateNoQuery.classList.add('hidden');
+          recentVehicles.classList.add('hidden');
+          emptyStateNoResults.classList.remove('hidden');
+          resultsSummary.classList.add('hidden');
+          historyList.innerHTML = '';
+          return;
+        }
+
+        // Calculate summary
+        var totalIncome = 0;
+        var totalPending = 0;
+        matchedIncome.forEach(function(r) {
+          var amt = Number(r.amount) || 0;
+          totalIncome += amt;
+          if (r.paymentStatus === '\u6302\u8d26') {
+            totalPending += amt;
+          }
+        });
+
+        // Get unique vehicle names from matched records
+        var vehicleNames = [];
+        var seenV = {};
+        matchedIncome.forEach(function(r) {
+          if (!seenV[r.vehicle]) {
+            seenV[r.vehicle] = true;
+            vehicleNames.push(r.vehicle);
+          }
+        });
+        var primaryVehicle = vehicleNames[0] || query;
+
+        // Show summary
+        emptyStateNoQuery.classList.add('hidden');
+        recentVehicles.classList.add('hidden');
+        emptyStateNoResults.classList.add('hidden');
+        resultsSummary.classList.remove('hidden');
+        summaryVehicle.textContent = primaryVehicle;
+        summaryIncome.textContent = formatAmount(totalIncome);
+        summaryPending.textContent = formatAmount(totalPending);
+        summaryCount.textContent = String(matchedIncome.length);
+
+        // Also find expense records for same vehicle to show in list
+        var allVehicleNames = vehicleNames;
+        var matchedExpense = records.filter(function(r) {
+          if (r.type !== 'expense') return false;
+          if (!r.vehicle) return false;
+          return allVehicleNames.some(function(vn) {
+            return r.vehicle.toLowerCase().indexOf(vn.toLowerCase()) !== -1;
+          });
+        });
+
+        // Combine and sort by date, newest first
+        var allRecords = matchedIncome.concat(matchedExpense);
+        allRecords.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+
+        // Render history list
+        historyList.innerHTML = '';
+        allRecords.forEach(function(record) {
+          var isIncome = record.type === 'income';
+          var borderColor = isIncome ? 'var(--tire-state-success)' : 'var(--tire-state-error)';
+          var iconName = getCategoryIcon(record.category || '');
+          var amountColor = isIncome ? 'text-[var(--tire-state-success)]' : 'text-[var(--tire-state-error)]';
+
+          var card = document.createElement('div');
+          card.className = 'bg-[var(--tire-card)] border border-[var(--tire-border)] rounded-[var(--tire-radius-lg)] p-3 border-l-[3px]';
+          card.style.borderLeftColor = borderColor;
+
+          // Top row: type label + category
+          var topRow = document.createElement('div');
+          topRow.className = 'flex items-center gap-2 mb-1';
+
+          var typeLabel = document.createElement('span');
+          typeLabel.className = 'text-[11px] font-semibold px-1.5 py-0.5 rounded ' +
+            (isIncome ? 'bg-[var(--tire-state-success)]/15 text-[var(--tire-state-success)]' : 'bg-[var(--tire-state-error)]/15 text-[var(--tire-state-error)]');
+          typeLabel.textContent = isIncome ? '\u6536\u5165' : '\u652f\u51fa';
+          topRow.appendChild(typeLabel);
+
+          var catIcon = document.createElement('i');
+          catIcon.setAttribute('data-lucide', iconName);
+          catIcon.className = 'w-3.5 h-3.5 text-[var(--tire-muted-foreground)] shrink-0';
+          topRow.appendChild(catIcon);
+
+          var catName = document.createElement('span');
+          catName.className = 'text-sm text-[var(--tire-foreground)] font-medium truncate min-w-0';
+          catName.textContent = record.category || '\u672a\u5206\u7c7b';
+          topRow.appendChild(catName);
+
+          card.appendChild(topRow);
+
+          // Second row: vehicle + expense type
+          var secondRow = document.createElement('div');
+          secondRow.className = 'flex items-center gap-1.5 text-xs text-[var(--tire-muted-foreground)] mb-1.5';
+
+          if (isIncome && record.vehicle) {
+            var vehicleSpan = document.createElement('span');
+            vehicleSpan.className = 'truncate';
+            vehicleSpan.innerHTML = highlightMatch(record.vehicle, query);
+            secondRow.appendChild(vehicleSpan);
+          }
+
+          if (!isIncome && record.vehicle) {
+            var expVehicleSpan = document.createElement('span');
+            expVehicleSpan.className = 'truncate';
+            expVehicleSpan.innerHTML = highlightMatch(record.vehicle, query);
+            secondRow.appendChild(expVehicleSpan);
+          }
+
+          if (!isIncome && record.expenseType) {
+            var typeTag = document.createElement('span');
+            typeTag.className = 'shrink-0 px-1 py-0.5 rounded bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)]';
+            typeTag.textContent = record.expenseType;
+            secondRow.appendChild(typeTag);
+          }
+
+          if (secondRow.childNodes.length > 0) {
+            card.appendChild(secondRow);
+          }
+
+          // Third row: amount + payment status + date
+          var thirdRow = document.createElement('div');
+          thirdRow.className = 'flex items-center justify-between';
+
+          var amountSpan = document.createElement('span');
+          amountSpan.className = 'text-base font-bold ' + amountColor + ' whitespace-nowrap';
+          amountSpan.textContent = (isIncome ? '+' : '-') + formatAmount(record.amount);
+          thirdRow.appendChild(amountSpan);
+
+          var rightInfo = document.createElement('div');
+          rightInfo.className = 'flex items-center gap-2 shrink-0';
+
+          if (isIncome && record.paymentStatus) {
+            var statusBadge = document.createElement('span');
+            if (record.paymentStatus === '\u5df2\u7ed3\u6e05') {
+              statusBadge.className = 'text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[var(--tire-state-success)]/15 text-[var(--tire-state-success)] whitespace-nowrap';
+              statusBadge.textContent = '\u5df2\u7ed3\u6e05';
+            } else {
+              statusBadge.className = 'text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[var(--tire-state-error)]/15 text-[var(--tire-state-error)] whitespace-nowrap';
+              statusBadge.textContent = '\u6302\u8d26';
+            }
+            rightInfo.appendChild(statusBadge);
+          }
+
+          var dateSpan = document.createElement('span');
+          dateSpan.className = 'text-[11px] text-[var(--tire-muted-foreground)] whitespace-nowrap';
+          dateSpan.textContent = formatDate(record.date);
+          rightInfo.appendChild(dateSpan);
+
+          thirdRow.appendChild(rightInfo);
+          card.appendChild(thirdRow);
+
+          // Note row
+          if (record.note) {
+            var noteRow = document.createElement('div');
+            noteRow.className = 'mt-1.5 text-xs text-[var(--tire-muted-foreground)] line-clamp-2';
+            noteRow.textContent = record.note;
+            card.appendChild(noteRow);
+          }
+
+          historyList.appendChild(card);
+        });
+
+        // Re-init lucide icons for dynamically added elements
+        lucide.createIcons();
+      }
+
+      // Event listeners
+      searchInput.addEventListener('input', function() {
+        var val = this.value;
+        if (val.length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function() {
+          handleSearch(val);
+        }, 300);
+      });
+
+      clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        clearBtn.classList.add('hidden');
+        showNoQuery();
+        searchInput.focus();
+      });
+
+      // Initialize with no query state
+      showNoQuery();
+    })();
+    </script>
+    <script>
+    // Register Service Worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    }
+    </script>
+</body>
+</html>

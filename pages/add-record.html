@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记账</title>
+    <style id="theme-vars">
+:root {
+  --tire-background: #111318;
+  --tire-foreground: #f0f0f5;
+  --tire-card: #1a1d25;
+  --tire-card-foreground: #f0f0f5;
+  --tire-popover: #22252e;
+  --tire-popover-foreground: #f0f0f5;
+  --tire-primary: #f97316;
+  --tire-primary-foreground: #ffffff;
+  --tire-muted: #272a35;
+  --tire-muted-foreground: #9ca3af;
+  --tire-border: #2d3140;
+  --tire-input: #1e2130;
+  --tire-ring: #f97316;
+  --tire-radius-sm: 6px;
+  --tire-radius-md: 10px;
+  --tire-radius-lg: 16px;
+  --tire-state-success: #22c55e;
+  --tire-state-warning: #eab308;
+  --tire-state-error: #ef4444;
+  --tire-state-info: #3b82f6;
+}
+
+/* Semantic token fallback */
+*, *::before, *::after {
+  --background: var(--tire-background);
+  --foreground: var(--tire-foreground);
+  --card: var(--tire-card);
+  --card-foreground: var(--tire-card-foreground);
+  --popover: var(--tire-popover);
+  --popover-foreground: var(--tire-popover-foreground);
+  --primary: var(--tire-primary);
+  --primary-foreground: var(--tire-primary-foreground);
+  --muted: var(--tire-muted);
+  --muted-foreground: var(--tire-muted-foreground);
+  --border: var(--tire-border);
+  --input: var(--tire-input);
+  --ring: var(--tire-ring);
+  --radius-sm: var(--tire-radius-sm);
+  --radius-md: var(--tire-radius-md);
+  --radius-lg: var(--tire-radius-lg);
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--tire-background);
+  color: var(--tire-foreground);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1 { font-size: 1.75rem; font-weight: 700; line-height: 1.3; }
+h2 { font-size: 1.375rem; font-weight: 600; line-height: 1.35; }
+h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.4; }
+
+/* Safe area for iPhone notch */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--tire-background);
+    --color-foreground: var(--tire-foreground);
+    --color-card: var(--tire-card);
+    --color-card-foreground: var(--tire-card-foreground);
+    --color-popover: var(--tire-popover);
+    --color-popover-foreground: var(--tire-popover-foreground);
+    --color-primary: var(--tire-primary);
+    --color-primary-foreground: var(--tire-primary-foreground);
+    --color-muted: var(--tire-muted);
+    --color-muted-foreground: var(--tire-muted-foreground);
+    --color-border: var(--tire-border);
+    --color-input: var(--tire-input);
+    --color-ring: var(--tire-ring);
+    --radius-sm: var(--tire-radius-sm);
+    --radius-md: var(--tire-radius-md);
+    --radius-lg: var(--tire-radius-lg);
+  }
+  @layer base {
+    body { background: var(--tire-background); color: var(--tire-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--tire-background); }
+      .text-background { color: var(--tire-background); }
+      .border-background { border-color: var(--tire-background); }
+      .ring-background { --tw-ring-color: var(--tire-background); }
+      .bg-foreground { background-color: var(--tire-foreground); }
+      .text-foreground { color: var(--tire-foreground); }
+      .border-foreground { border-color: var(--tire-foreground); }
+      .ring-foreground { --tw-ring-color: var(--tire-foreground); }
+      .bg-card { background-color: var(--tire-card); }
+      .text-card { color: var(--tire-card); }
+      .border-card { border-color: var(--tire-card); }
+      .ring-card { --tw-ring-color: var(--tire-card); }
+      .bg-card-foreground { background-color: var(--tire-card-foreground); }
+      .text-card-foreground { color: var(--tire-card-foreground); }
+      .border-card-foreground { border-color: var(--tire-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--tire-card-foreground); }
+      .bg-popover { background-color: var(--tire-popover); }
+      .text-popover { color: var(--tire-popover); }
+      .border-popover { border-color: var(--tire-popover); }
+      .ring-popover { --tw-ring-color: var(--tire-popover); }
+      .bg-popover-foreground { background-color: var(--tire-popover-foreground); }
+      .text-popover-foreground { color: var(--tire-popover-foreground); }
+      .border-popover-foreground { border-color: var(--tire-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--tire-popover-foreground); }
+      .bg-primary { background-color: var(--tire-primary); }
+      .text-primary { color: var(--tire-primary); }
+      .border-primary { border-color: var(--tire-primary); }
+      .ring-primary { --tw-ring-color: var(--tire-primary); }
+      .bg-primary-foreground { background-color: var(--tire-primary-foreground); }
+      .text-primary-foreground { color: var(--tire-primary-foreground); }
+      .border-primary-foreground { border-color: var(--tire-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--tire-primary-foreground); }
+      .bg-muted { background-color: var(--tire-muted); }
+      .text-muted { color: var(--tire-muted); }
+      .border-muted { border-color: var(--tire-muted); }
+      .ring-muted { --tw-ring-color: var(--tire-muted); }
+      .bg-muted-foreground { background-color: var(--tire-muted-foreground); }
+      .text-muted-foreground { color: var(--tire-muted-foreground); }
+      .border-muted-foreground { border-color: var(--tire-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--tire-muted-foreground); }
+      .bg-border { background-color: var(--tire-border); }
+      .text-border { color: var(--tire-border); }
+      .border-border { border-color: var(--tire-border); }
+      .ring-border { --tw-ring-color: var(--tire-border); }
+      .bg-input { background-color: var(--tire-input); }
+      .text-input { color: var(--tire-input); }
+      .border-input { border-color: var(--tire-input); }
+      .ring-input { --tw-ring-color: var(--tire-input); }
+      .bg-ring { background-color: var(--tire-ring); }
+      .text-ring { color: var(--tire-ring); }
+      .border-ring { border-color: var(--tire-ring); }
+      .ring-ring { --tw-ring-color: var(--tire-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="pb-24 px-4 pt-4 max-w-md mx-auto">
+      <!-- Page Title -->
+      <h1 class="text-xl font-bold text-[var(--tire-foreground)] mb-4">记账</h1>
+
+      <!-- Type Toggle -->
+      <div class="flex rounded-[var(--tire-radius-lg)] overflow-hidden mb-6 border border-[var(--tire-border)]">
+        <button id="btn-toggle-income" data-type="income" class="flex-1 min-h-[48px] flex items-center justify-center text-base font-semibold bg-[var(--tire-primary)] text-white transition-colors">收入</button>
+        <button id="btn-toggle-expense" data-type="expense" class="flex-1 min-h-[48px] flex items-center justify-center text-base font-semibold bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] transition-colors">支出</button>
+      </div>
+
+      <!-- Income Form -->
+      <div id="form-income" class="space-y-5">
+        <!-- 车牌号/姓名 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">车牌号/姓名</label>
+          <input id="income-vehicle" type="text" placeholder="输入车牌号或司机姓名" class="w-full bg-[var(--tire-input)] border border-[var(--tire-border)] rounded-[var(--tire-radius-md)] px-4 py-3 text-white text-lg placeholder:text-[var(--tire-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--tire-ring)]">
+          <p class="text-xs text-[var(--tire-muted-foreground)] mt-1">示例：鲁Q1234 或 张师傅</p>
+          <p id="income-vehicle-error" class="text-xs text-[var(--tire-state-error)] mt-1 hidden"></p>
+        </div>
+
+        <!-- 收入项目 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">收入项目</label>
+          <div id="income-category-grid" class="grid grid-cols-2 gap-2">
+            <button data-category="补胎" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">补胎</button>
+            <button data-category="调胎" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">调胎</button>
+            <button data-category="打黄油" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">打黄油</button>
+            <button data-category="电焊" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">电焊</button>
+            <button data-category="充气" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">充气</button>
+            <button data-category="新胎" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">新胎</button>
+            <button data-category="钢圈" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">钢圈</button>
+            <button data-category="换备胎" class="cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">换备胎</button>
+          </div>
+          <p id="income-category-error" class="text-xs text-[var(--tire-state-error)] mt-1 hidden"></p>
+        </div>
+
+        <!-- 支付状态 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">支付状态</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button data-payment="settled" class="payment-btn active min-h-[48px] flex items-center justify-center gap-2 rounded-[var(--tire-radius-md)] text-base font-medium border-2 transition-colors border-[var(--tire-state-success)] text-[var(--tire-state-success)] bg-[var(--tire-input)]">
+              <i data-lucide="check-circle" class="w-5 h-5 shrink-0"></i>
+              <span>已结清</span>
+            </button>
+            <button data-payment="pending" class="payment-btn min-h-[48px] flex items-center justify-center gap-2 rounded-[var(--tire-radius-md)] text-base font-medium border-2 transition-colors border-[var(--tire-border)] text-[var(--tire-muted-foreground)] bg-[var(--tire-input)]">
+              <i data-lucide="clock" class="w-5 h-5 shrink-0"></i>
+              <span>挂账</span>
+            </button>
+          </div>
+          <p id="payment-warning" class="text-xs text-[var(--tire-state-error)] mt-1 hidden">此笔金额将记入应收欠款</p>
+        </div>
+
+        <!-- 金额 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">金额</label>
+          <input id="income-amount" type="text" inputmode="decimal" placeholder="输入金额" class="w-full bg-[var(--tire-input)] border border-[var(--tire-border)] rounded-[var(--tire-radius-md)] px-4 py-3 text-white text-2xl font-bold placeholder:text-[var(--tire-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--tire-ring)]">
+          <p class="text-xs text-[var(--tire-muted-foreground)] mt-1">单位：元</p>
+          <p id="income-amount-error" class="text-xs text-[var(--tire-state-error)] mt-1 hidden"></p>
+        </div>
+
+        <!-- 备注 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">备注</label>
+          <input id="income-note" type="text" placeholder="备注信息（选填）" class="w-full bg-[var(--tire-input)] border border-[var(--tire-border)] rounded-[var(--tire-radius-md)] px-4 py-3 text-white text-lg placeholder:text-[var(--tire-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--tire-ring)]">
+        </div>
+      </div>
+
+      <!-- Expense Form -->
+      <div id="form-expense" class="space-y-5 hidden">
+        <!-- 支出类型 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">支出类型</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button data-expense-type="work" class="expense-type-btn active min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] text-base font-medium border-2 transition-colors border-[var(--tire-primary)] text-[var(--tire-primary)] bg-[var(--tire-input)]">工作支出</button>
+            <button data-expense-type="living" class="expense-type-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] text-base font-medium border-2 transition-colors border-[var(--tire-border)] text-[var(--tire-muted-foreground)] bg-[var(--tire-input)]">生活支出</button>
+          </div>
+        </div>
+
+        <!-- 支出项目 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">支出项目</label>
+          <div id="expense-category-work" class="expense-cat-group grid grid-cols-2 gap-2">
+            <button data-category="新胎购买" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">新胎购买</button>
+            <button data-category="修补材料" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">修补材料</button>
+            <button data-category="工具" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">工具</button>
+            <button data-category="救援油费" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">救援油费</button>
+          </div>
+          <div id="expense-category-living" class="expense-cat-group grid grid-cols-2 gap-2 hidden">
+            <button data-category="加油" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">加油</button>
+            <button data-category="吃饭" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">吃饭</button>
+            <button data-category="转账红包" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">转账红包</button>
+            <button data-category="零食" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">零食</button>
+            <button data-category="水电燃气" class="expense-cat-btn cat-btn min-h-[48px] flex items-center justify-center rounded-[var(--tire-radius-md)] bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] text-base font-medium border-2 border-transparent transition-colors">水电燃气</button>
+          </div>
+          <p id="expense-category-error" class="text-xs text-[var(--tire-state-error)] mt-1 hidden"></p>
+        </div>
+
+        <!-- 金额 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">金额</label>
+          <input id="expense-amount" type="text" inputmode="decimal" placeholder="输入金额" class="w-full bg-[var(--tire-input)] border border-[var(--tire-border)] rounded-[var(--tire-radius-md)] px-4 py-3 text-white text-2xl font-bold placeholder:text-[var(--tire-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--tire-ring)]">
+          <p class="text-xs text-[var(--tire-muted-foreground)] mt-1">单位：元</p>
+          <p id="expense-amount-error" class="text-xs text-[var(--tire-state-error)] mt-1 hidden"></p>
+        </div>
+
+        <!-- 备注 -->
+        <div>
+          <label class="block text-sm font-medium text-[var(--tire-muted-foreground)] mb-1.5">备注</label>
+          <input id="expense-note" type="text" placeholder="备注信息（选填）" class="w-full bg-[var(--tire-input)] border border-[var(--tire-border)] rounded-[var(--tire-radius-md)] px-4 py-3 text-white text-lg placeholder:text-[var(--tire-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--tire-ring)]">
+        </div>
+      </div>
+
+      <!-- Save Button -->
+      <div class="fixed bottom-16 left-0 right-0 z-40 px-4 pb-[env(safe-area-inset-bottom,0px)]">
+        <div class="max-w-md mx-auto">
+          <button id="btn-save-record" class="w-full min-h-[52px] rounded-[var(--tire-radius-md)] bg-[var(--tire-primary)] text-white text-lg font-bold transition-colors active:opacity-80">保存记账</button>
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div id="toast" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] bg-[var(--tire-state-success)] text-white px-4 py-2.5 rounded-[var(--tire-radius-md)] text-sm font-medium opacity-0 pointer-events-none transition-opacity duration-300 whitespace-nowrap">保存成功</div>
+
+      <!-- Mobile Navigation -->
+      <nav data-mobile-nav="global" class="fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50">
+        <div class="w-full max-w-md mx-auto grid grid-cols-4 h-full">
+          <a href="home.html" data-nav-key="home" data-dom-id="nav-home" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+            <i data-lucide="layout-dashboard" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+          </a>
+          <a href="add-record.html" data-nav-key="add-record" data-active="true" data-dom-id="nav-add-record" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]">
+            <i data-lucide="plus-circle" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">记账</span>
+          </a>
+          <a href="debts.html" data-nav-key="debts" data-dom-id="nav-debts" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+            <i data-lucide="file-text" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">欠款</span>
+          </a>
+          <a href="search.html" data-nav-key="search" data-dom-id="nav-search" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+            <i data-lucide="search" class="w-5 h-5 shrink-0"></i>
+            <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">搜索</span>
+          </a>
+        </div>
+      </nav>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // --- State ---
+      let currentType = 'income';
+      let selectedIncomeCategory = '';
+      let selectedExpenseCategory = '';
+      let paymentStatus = 'settled';
+      let expenseType = 'work';
+
+      // --- DOM refs ---
+      const btnToggleIncome = document.getElementById('btn-toggle-income');
+      const btnToggleExpense = document.getElementById('btn-toggle-expense');
+      const formIncome = document.getElementById('form-income');
+      const formExpense = document.getElementById('form-expense');
+      const btnSave = document.getElementById('btn-save-record');
+      const toast = document.getElementById('toast');
+      const paymentWarning = document.getElementById('payment-warning');
+
+      const incomeCategoryGrid = document.getElementById('income-category-grid');
+      const expenseCatWork = document.getElementById('expense-category-work');
+      const expenseCatLiving = document.getElementById('expense-category-living');
+
+      // --- Type Toggle ---
+      btnToggleIncome.addEventListener('click', function() {
+        currentType = 'income';
+        btnToggleIncome.classList.add('bg-[var(--tire-primary)]', 'text-white');
+        btnToggleIncome.classList.remove('bg-[var(--tire-muted)]', 'text-[var(--tire-muted-foreground)]');
+        btnToggleExpense.classList.remove('bg-[var(--tire-primary)]', 'text-white');
+        btnToggleExpense.classList.add('bg-[var(--tire-muted)]', 'text-[var(--tire-muted-foreground)]');
+        formIncome.classList.remove('hidden');
+        formExpense.classList.add('hidden');
+      });
+
+      btnToggleExpense.addEventListener('click', function() {
+        currentType = 'expense';
+        btnToggleExpense.classList.add('bg-[var(--tire-primary)]', 'text-white');
+        btnToggleExpense.classList.remove('bg-[var(--tire-muted)]', 'text-[var(--tire-muted-foreground)]');
+        btnToggleIncome.classList.remove('bg-[var(--tire-primary)]', 'text-white');
+        btnToggleIncome.classList.add('bg-[var(--tire-muted)]', 'text-[var(--tire-muted-foreground)]');
+        formExpense.classList.remove('hidden');
+        formIncome.classList.add('hidden');
+      });
+
+      // --- Income Category Selection ---
+      incomeCategoryGrid.addEventListener('click', function(e) {
+        var btn = e.target.closest('.cat-btn');
+        if (!btn) return;
+        incomeCategoryGrid.querySelectorAll('.cat-btn').forEach(function(b) {
+          b.classList.remove('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+          b.classList.add('border-transparent', 'text-[var(--tire-muted-foreground)]');
+        });
+        btn.classList.add('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+        btn.classList.remove('border-transparent', 'text-[var(--tire-muted-foreground)]');
+        selectedIncomeCategory = btn.getAttribute('data-category');
+      });
+
+      // --- Expense Category Selection (delegated to both groups) ---
+      document.querySelectorAll('.expense-cat-group').forEach(function(group) {
+        group.addEventListener('click', function(e) {
+          var btn = e.target.closest('.cat-btn');
+          if (!btn) return;
+          document.querySelectorAll('.expense-cat-group .cat-btn').forEach(function(b) {
+            b.classList.remove('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+            b.classList.add('border-transparent', 'text-[var(--tire-muted-foreground)]');
+          });
+          btn.classList.add('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+          btn.classList.remove('border-transparent', 'text-[var(--tire-muted-foreground)]');
+          selectedExpenseCategory = btn.getAttribute('data-category');
+        });
+      });
+
+      // --- Payment Status ---
+      document.querySelectorAll('.payment-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.payment-btn').forEach(function(b) {
+            b.classList.remove('active');
+            b.classList.remove('border-[var(--tire-state-success)]', 'text-[var(--tire-state-success)]', 'border-[var(--tire-state-error)]', 'text-[var(--tire-state-error)]');
+            b.classList.add('border-[var(--tire-border)]', 'text-[var(--tire-muted-foreground)]');
+          });
+          var val = btn.getAttribute('data-payment');
+          paymentStatus = val;
+          btn.classList.add('active');
+          if (val === 'settled') {
+            btn.classList.add('border-[var(--tire-state-success)]', 'text-[var(--tire-state-success)]');
+            paymentWarning.classList.add('hidden');
+          } else {
+            btn.classList.add('border-[var(--tire-state-error)]', 'text-[var(--tire-state-error)]');
+            paymentWarning.classList.remove('hidden');
+          }
+        });
+      });
+
+      // --- Expense Type ---
+      document.querySelectorAll('.expense-type-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.expense-type-btn').forEach(function(b) {
+            b.classList.remove('active', 'border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+            b.classList.add('border-[var(--tire-border)]', 'text-[var(--tire-muted-foreground)]');
+          });
+          var val = btn.getAttribute('data-expense-type');
+          expenseType = val;
+          btn.classList.add('active', 'border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+          selectedExpenseCategory = '';
+          document.querySelectorAll('.expense-cat-group').forEach(function(g) {
+            g.querySelectorAll('.cat-btn').forEach(function(b) {
+              b.classList.remove('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+              b.classList.add('border-transparent', 'text-[var(--tire-muted-foreground)]');
+            });
+          });
+          if (val === 'work') {
+            expenseCatWork.classList.remove('hidden');
+            expenseCatLiving.classList.add('hidden');
+          } else {
+            expenseCatWork.classList.add('hidden');
+            expenseCatLiving.classList.remove('hidden');
+          }
+        });
+      });
+
+      // --- Validation helpers ---
+      function showError(el, msg) {
+        el.textContent = msg;
+        el.classList.remove('hidden');
+      }
+      function hideError(el) {
+        el.classList.add('hidden');
+        el.textContent = '';
+      }
+      function clearAllErrors() {
+        document.querySelectorAll('[id$="-error"]').forEach(function(el) { hideError(el); });
+      }
+
+      // --- Save ---
+      btnSave.addEventListener('click', function() {
+        clearAllErrors();
+        var valid = true;
+        var record = {};
+        record.id = Date.now().toString();
+        record.type = currentType;
+        record.date = new Date().toISOString();
+        record.note = '';
+
+        if (currentType === 'income') {
+          var vehicle = document.getElementById('income-vehicle').value.trim();
+          if (!vehicle) {
+            showError(document.getElementById('income-vehicle-error'), '请输入车牌号或姓名');
+            valid = false;
+          }
+          record.vehicle = vehicle;
+          record.category = selectedIncomeCategory;
+          if (!selectedIncomeCategory) {
+            showError(document.getElementById('income-category-error'), '请选择收入项目');
+            valid = false;
+          }
+          record.paymentStatus = paymentStatus;
+          var amount = document.getElementById('income-amount').value.trim();
+          if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
+            showError(document.getElementById('income-amount-error'), '请输入有效金额');
+            valid = false;
+          }
+          record.amount = parseFloat(amount);
+          record.note = document.getElementById('income-note').value.trim();
+          record.expenseType = '';
+        } else {
+          record.vehicle = '';
+          record.paymentStatus = '';
+          record.expenseType = expenseType;
+          record.category = selectedExpenseCategory;
+          if (!selectedExpenseCategory) {
+            showError(document.getElementById('expense-category-error'), '请选择支出项目');
+            valid = false;
+          }
+          var amount2 = document.getElementById('expense-amount').value.trim();
+          if (!amount2 || isNaN(parseFloat(amount2)) || parseFloat(amount2) <= 0) {
+            showError(document.getElementById('expense-amount-error'), '请输入有效金额');
+            valid = false;
+          }
+          record.amount = parseFloat(amount2);
+          record.note = document.getElementById('expense-note').value.trim();
+        }
+
+        if (!valid) return;
+
+        // Save to localStorage
+        var records = [];
+        try {
+          var stored = localStorage.getItem('tire_records');
+          if (stored) records = JSON.parse(stored);
+        } catch(e) {}
+        records.push(record);
+        localStorage.setItem('tire_records', JSON.stringify(records));
+
+        // Show toast
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+        setTimeout(function() {
+          toast.classList.remove('opacity-100');
+          toast.classList.add('opacity-0');
+        }, 1500);
+
+        // Reset form
+        resetForm();
+      });
+
+      function resetForm() {
+        if (currentType === 'income') {
+          document.getElementById('income-vehicle').value = '';
+          document.getElementById('income-amount').value = '';
+          document.getElementById('income-note').value = '';
+          selectedIncomeCategory = '';
+          incomeCategoryGrid.querySelectorAll('.cat-btn').forEach(function(b) {
+            b.classList.remove('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+            b.classList.add('border-transparent', 'text-[var(--tire-muted-foreground)]');
+          });
+          paymentStatus = 'settled';
+          document.querySelectorAll('.payment-btn').forEach(function(b) {
+            b.classList.remove('active', 'border-[var(--tire-state-success)]', 'text-[var(--tire-state-success)]', 'border-[var(--tire-state-error)]', 'text-[var(--tire-state-error)]');
+            b.classList.add('border-[var(--tire-border)]', 'text-[var(--tire-muted-foreground)]');
+          });
+          var settledBtn = document.querySelector('.payment-btn[data-payment="settled"]');
+          settledBtn.classList.add('active', 'border-[var(--tire-state-success)]', 'text-[var(--tire-state-success)]');
+          paymentWarning.classList.add('hidden');
+        } else {
+          document.getElementById('expense-amount').value = '';
+          document.getElementById('expense-note').value = '';
+          selectedExpenseCategory = '';
+          document.querySelectorAll('.expense-cat-group').forEach(function(g) {
+            g.querySelectorAll('.cat-btn').forEach(function(b) {
+              b.classList.remove('border-[var(--tire-primary)]', 'text-[var(--tire-primary)]');
+              b.classList.add('border-transparent', 'text-[var(--tire-muted-foreground)]');
+            });
+          });
+        }
+      }
+    });
+
+    lucide.createIcons();
+    </script>
+    <script>
+    // Register Service Worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    }
+    </script>
+</body>
+</html>

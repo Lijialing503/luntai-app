@@ -1,0 +1,159 @@
+{
+  "data": [
+    {
+      "id": "page-home",
+      "title": "首页汇总",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753267200000,
+      "canvasData": {
+        "x": 0,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/home.html",
+        "interactions": [
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-add-record",
+            "targetPageId": "page-add-record",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-debts",
+            "targetPageId": "page-debts",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-search",
+            "targetPageId": "page-search",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-add-record",
+      "title": "记账",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753267200000,
+      "canvasData": {
+        "x": 309,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/add-record.html",
+        "interactions": [
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-add-record",
+            "targetPageId": "page-add-record",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-debts",
+            "targetPageId": "page-debts",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-search",
+            "targetPageId": "page-search",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-debts",
+      "title": "欠款催收",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753267200000,
+      "canvasData": {
+        "x": 618,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/debts.html",
+        "interactions": [
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-add-record",
+            "targetPageId": "page-add-record",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-debts",
+            "targetPageId": "page-debts",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-search",
+            "targetPageId": "page-search",
+            "hideEdge": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "page-search",
+      "title": "搜索",
+      "type": "page",
+      "version": 1,
+      "createdAt": 1753267200000,
+      "canvasData": {
+        "x": 927,
+        "y": 0,
+        "group": 0
+      },
+      "devMetadata": {
+        "htmlSrc": "pages/search.html",
+        "interactions": [
+          {
+            "domId": "nav-home",
+            "targetPageId": "page-home",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-add-record",
+            "targetPageId": "page-add-record",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-debts",
+            "targetPageId": "page-debts",
+            "hideEdge": true
+          },
+          {
+            "domId": "nav-search",
+            "targetPageId": "page-search",
+            "hideEdge": true
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "autoLayout": true,
+    "deviceType": "mobile",
+    "projectName": "轮胎修补记账",
+    "visualEditorEnabled": false,
+    "showEdge": true
+  }
+}

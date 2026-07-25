@@ -1,0 +1,185 @@
+{
+  "skillProvenance": {
+    "name": "solo-design",
+    "version": "2026.07.06.8",
+    "runtime_skill_dir": "/data/user/builtin/design/hebe/skills/solo-design",
+    "version_source": "skill-version.json",
+    "recorded_at": "2026-07-23T12:00:00+08:00"
+  },
+  "project": {
+    "name": "轮胎修补记账",
+    "path": "/workspace/tire-accounting",
+    "operation": "create",
+    "deviceType": "mobile",
+    "language": "zh-CN",
+    "dashboardMode": false,
+    "intentProfile": {
+      "caseFamily": "free_exploration",
+      "graphicStrategy": null,
+      "sourceType": null,
+      "routingReason": "User requests a new mobile app UI with no existing design library or reference"
+    },
+    "replicationMode": null,
+    "sourceUrl": null,
+    "cssPreflightEvidence": {
+      "applies": true,
+      "status": "passed",
+      "command": "node /data/user/builtin/design/hebe/skills/solo-design/script/fill-html-head.mjs /workspace/tire-accounting/colors_and_type.css /workspace/tire-accounting/.preflight/preflight.html --title=\"Preflight\" --lang=zh-CN --prefix=tire",
+      "brandPrefix": "tire",
+      "checks": {
+        "themeVars": "present",
+        "semanticTokenFallback": "present",
+        "themeInline": "present",
+        "tailwindCdn": "present",
+        "htmlClass": "present",
+        "semanticMappings": "resolved"
+      },
+      "retryCount": 0,
+      "blockingReason": null
+    },
+    "designRead": "mobile app / field workers / practical dark-theme / balanced / avoid clutter",
+    "designDials": {
+      "layoutVariance": 3,
+      "motionIntensity": 1,
+      "visualDensity": 3
+    },
+    "styleDefinitionBrief": "Dark industrial theme with orange accent. Large touch targets for dirty hands. Compact info-dense cards for quick data scanning.",
+    "sharedProjectShellContract": {
+      "navigationShell": "bottom tab bar with 4 items: Home, Add Record, Debts, Search",
+      "primaryColorSystem": "orange #f97316 for primary CTA and active states",
+      "typographySystem": "system font stack, 16px base, SF Pro for iOS feel",
+      "radiusScale": "sm:6px md:10px lg:16px",
+      "surfaceDepthModel": "dark layered surfaces with subtle borders, no heavy shadows",
+      "ctaStyle": "large rounded buttons, min-height 48px for touch, orange fill white text",
+      "alignmentRules": "left-aligned content, centered tab bar, consistent 16px padding",
+      "mobileNavigation": {
+        "applies": true,
+        "type": "bottom-tab",
+        "items": [
+          {"key": "home", "label": "首页", "icon": "layout-dashboard"},
+          {"key": "add-record", "label": "记账", "icon": "plus-circle"},
+          {"key": "debts", "label": "欠款", "icon": "file-text"},
+          {"key": "search", "label": "搜索", "icon": "search"}
+        ],
+        "heightPx": 64,
+        "position": "fixed-bottom",
+        "activeState": "orange text + icon, white text for others",
+        "structure": {
+          "navTag": "nav",
+          "navClass": "fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)]",
+          "innerClass": "w-full max-w-md mx-auto grid grid-cols-4 h-full",
+          "itemTag": "a",
+          "itemClass": "min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full",
+          "iconClass": "w-5 h-5 shrink-0",
+          "labelClass": "text-[11px] leading-none whitespace-nowrap max-w-full truncate",
+          "activeRule": "only color/font-weight may change; no class changes affecting layout",
+          "markerAttr": "data-mobile-nav=\"global\"",
+          "canonicalHtmlByKey": {
+            "home": "<nav data-mobile-nav=\"global\" class=\"fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50\">\n  <div class=\"w-full max-w-md mx-auto grid grid-cols-4 h-full\">\n    <a href=\"home.html\" data-nav-key=\"home\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]\">\n      <i data-lucide=\"layout-dashboard\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">首页</span>\n    </a>\n    <a href=\"add-record.html\" data-nav-key=\"add-record\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"plus-circle\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">记账</span>\n    </a>\n    <a href=\"debts.html\" data-nav-key=\"debts\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"file-text\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">欠款</span>\n    </a>\n    <a href=\"search.html\" data-nav-key=\"search\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"search\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">搜索</span>\n    </a>\n  </div>\n</nav>",
+            "add-record": "<nav data-mobile-nav=\"global\" class=\"fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50\">\n  <div class=\"w-full max-w-md mx-auto grid grid-cols-4 h-full\">\n    <a href=\"home.html\" data-nav-key=\"home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"layout-dashboard\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">首页</span>\n    </a>\n    <a href=\"add-record.html\" data-nav-key=\"add-record\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]\">\n      <i data-lucide=\"plus-circle\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">记账</span>\n    </a>\n    <a href=\"debts.html\" data-nav-key=\"debts\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"file-text\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">欠款</span>\n    </a>\n    <a href=\"search.html\" data-nav-key=\"search\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"search\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">搜索</span>\n    </a>\n  </div>\n</nav>",
+            "debts": "<nav data-mobile-nav=\"global\" class=\"fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50\">\n  <div class=\"w-full max-w-md mx-auto grid grid-cols-4 h-full\">\n    <a href=\"home.html\" data-nav-key=\"home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"layout-dashboard\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">首页</span>\n    </a>\n    <a href=\"add-record.html\" data-nav-key=\"add-record\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"plus-circle\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">记账</span>\n    </a>\n    <a href=\"debts.html\" data-nav-key=\"debts\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]\">\n      <i data-lucide=\"file-text\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">欠款</span>\n    </a>\n    <a href=\"search.html\" data-nav-key=\"search\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"search\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">搜索</span>\n    </a>\n  </div>\n</nav>",
+            "search": "<nav data-mobile-nav=\"global\" class=\"fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50\">\n  <div class=\"w-full max-w-md mx-auto grid grid-cols-4 h-full\">\n    <a href=\"home.html\" data-nav-key=\"home\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"layout-dashboard\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">首页</span>\n    </a>\n    <a href=\"add-record.html\" data-nav-key=\"add-record\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"plus-circle\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">记账</span>\n    </a>\n    <a href=\"debts.html\" data-nav-key=\"debts\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]\">\n      <i data-lucide=\"file-text\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">欠款</span>\n    </a>\n    <a href=\"search.html\" data-nav-key=\"search\" data-active=\"true\" class=\"min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]\">\n      <i data-lucide=\"search\" class=\"w-5 h-5 shrink-0\"></i>\n      <span class=\"text-[11px] leading-none whitespace-nowrap max-w-full truncate\">搜索</span>\n    </a>\n  </div>\n</nav>"
+          }
+        }
+      }
+    },
+    "dispatchPreflightManifest": [
+      {"recorded_at":"2026-07-23T12:00:00+08:00","packetType":"FreePagePacket","sharedTemplate":"workflows/page-generation-free-card.md","taskLinePresent":true,"outputPathPresent":true,"nodeId":"page-home","htmlSrc":"pages/home.html","cssFilePath":"/workspace/tire-accounting/colors_and_type.css","htmlFilePath":"/workspace/tire-accounting/pages/home.html","brandPrefix":"tire","aestheticsMode":"free-explore","toolDisciplineBlockPresent":true,"fillHtmlHeadCommandValid":true,"pageSliceOnly":true,"requiredFieldsPresent":true,"missingFields":[],"fillHtmlHeadCommand":"node /data/user/builtin/design/hebe/skills/solo-design/script/fill-html-head.mjs /workspace/tire-accounting/colors_and_type.css /workspace/tire-accounting/pages/home.html --title=\"首页汇总\" --lang=zh-CN --prefix=tire","mobileNavigation":{"required":true,"appliesToThisPage":true,"activeKey":"home","contractPresent":true,"structurePresent":true,"canonicalHtmlIncluded":true,"canonicalHtmlSource":"sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.home","missingFields":[]},"persistedToSummary":true},
+      {"recorded_at":"2026-07-23T12:00:00+08:00","packetType":"FreePagePacket","sharedTemplate":"workflows/page-generation-free-card.md","taskLinePresent":true,"outputPathPresent":true,"nodeId":"page-add-record","htmlSrc":"pages/add-record.html","cssFilePath":"/workspace/tire-accounting/colors_and_type.css","htmlFilePath":"/workspace/tire-accounting/pages/add-record.html","brandPrefix":"tire","aestheticsMode":"free-explore","toolDisciplineBlockPresent":true,"fillHtmlHeadCommandValid":true,"pageSliceOnly":true,"requiredFieldsPresent":true,"missingFields":[],"fillHtmlHeadCommand":"node /data/user/builtin/design/hebe/skills/solo-design/script/fill-html-head.mjs /workspace/tire-accounting/colors_and_type.css /workspace/tire-accounting/pages/add-record.html --title=\"记账\" --lang=zh-CN --prefix=tire","mobileNavigation":{"required":true,"appliesToThisPage":true,"activeKey":"add-record","contractPresent":true,"structurePresent":true,"canonicalHtmlIncluded":true,"canonicalHtmlSource":"sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.add-record","missingFields":[]},"persistedToSummary":true},
+      {"recorded_at":"2026-07-23T12:00:00+08:00","packetType":"FreePagePacket","sharedTemplate":"workflows/page-generation-free-card.md","taskLinePresent":true,"outputPathPresent":true,"nodeId":"page-debts","htmlSrc":"pages/debts.html","cssFilePath":"/workspace/tire-accounting/colors_and_type.css","htmlFilePath":"/workspace/tire-accounting/pages/debts.html","brandPrefix":"tire","aestheticsMode":"free-explore","toolDisciplineBlockPresent":true,"fillHtmlHeadCommandValid":true,"pageSliceOnly":true,"requiredFieldsPresent":true,"missingFields":[],"fillHtmlHeadCommand":"node /data/user/builtin/design/hebe/skills/solo-design/script/fill-html-head.mjs /workspace/tire-accounting/colors_and_type.css /workspace/tire-accounting/pages/debts.html --title=\"欠款催收\" --lang=zh-CN --prefix=tire","mobileNavigation":{"required":true,"appliesToThisPage":true,"activeKey":"debts","contractPresent":true,"structurePresent":true,"canonicalHtmlIncluded":true,"canonicalHtmlSource":"sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.debts","missingFields":[]},"persistedToSummary":true},
+      {"recorded_at":"2026-07-23T12:00:00+08:00","packetType":"FreePagePacket","sharedTemplate":"workflows/page-generation-free-card.md","taskLinePresent":true,"outputPathPresent":true,"nodeId":"page-search","htmlSrc":"pages/search.html","cssFilePath":"/workspace/tire-accounting/colors_and_type.css","htmlFilePath":"/workspace/tire-accounting/pages/search.html","brandPrefix":"tire","aestheticsMode":"free-explore","toolDisciplineBlockPresent":true,"fillHtmlHeadCommandValid":true,"pageSliceOnly":true,"requiredFieldsPresent":true,"missingFields":[],"fillHtmlHeadCommand":"node /data/user/builtin/design/hebe/skills/solo-design/script/fill-html-head.mjs /workspace/tire-accounting/colors_and_type.css /workspace/tire-accounting/pages/search.html --title=\"搜索\" --lang=zh-CN --prefix=tire","mobileNavigation":{"required":true,"appliesToThisPage":true,"activeKey":"search","contractPresent":true,"structurePresent":true,"canonicalHtmlIncluded":true,"canonicalHtmlSource":"sharedProjectShellContract.mobileNavigation.structure.canonicalHtmlByKey.search","missingFields":[]},"persistedToSummary":true}
+    ]
+  },
+  "designSource": {
+    "operatingMode": "free-explore",
+    "libraryIdentity": null,
+    "cssFilePath": "/workspace/tire-accounting/colors_and_type.css",
+    "brandPrefix": "tire",
+    "themeMode": "dark",
+    "designDecisionSummary": "Dark industrial theme for tire repair workers. Orange accent color. Large touch targets.",
+    "actualTokenNameReference": [
+      {"semanticPurpose": "Background", "tokenName": "tire-background"},
+      {"semanticPurpose": "Card", "tokenName": "tire-card"},
+      {"semanticPurpose": "Primary", "tokenName": "tire-primary"},
+      {"semanticPurpose": "Foreground", "tokenName": "tire-foreground"},
+      {"semanticPurpose": "Border", "tokenName": "tire-border"},
+      {"semanticPurpose": "Muted", "tokenName": "tire-muted"},
+      {"semanticPurpose": "Input", "tokenName": "tire-input"},
+      {"semanticPurpose": "Error", "tokenName": "tire-state-error"},
+      {"semanticPurpose": "Success", "tokenName": "tire-state-success"}
+    ]
+  },
+  "pages": [
+    {
+      "nodeId": "page-home",
+      "slug": "home",
+      "title": "首页汇总",
+      "htmlSrc": "pages/home.html",
+      "pageIndex": 1,
+      "pageType": "task-driven",
+      "viewportMode": "document-scroll",
+      "businessScenario": "Monthly financial summary dashboard with income, debts, costs, and profit overview",
+      "visualNorthStar": "Dark industrial dashboard with bold red/orange financial KPIs, scannable at a glance with dirty hands",
+      "mobileNavigationApplies": true,
+      "mobileNavigationActiveKey": "home"
+    },
+    {
+      "nodeId": "page-add-record",
+      "slug": "add-record",
+      "title": "记账",
+      "htmlSrc": "pages/add-record.html",
+      "pageIndex": 2,
+      "pageType": "task-driven",
+      "viewportMode": "document-scroll",
+      "businessScenario": "Entry form for income (with payment status) and expense records",
+      "visualNorthStar": "Large form with big buttons, clear category selectors, and a prominent save button at bottom",
+      "mobileNavigationApplies": true,
+      "mobileNavigationActiveKey": "add-record"
+    },
+    {
+      "nodeId": "page-debts",
+      "slug": "debts",
+      "title": "欠款催收",
+      "htmlSrc": "pages/debts.html",
+      "pageIndex": 3,
+      "pageType": "task-driven",
+      "viewportMode": "document-scroll",
+      "businessScenario": "List of unpaid records grouped by license plate, with collect buttons",
+      "visualNorthStar": "Red-tinted urgency list with clear vehicle identification and one-tap collect action",
+      "mobileNavigationApplies": true,
+      "mobileNavigationActiveKey": "debts"
+    },
+    {
+      "nodeId": "page-search",
+      "slug": "search",
+      "title": "搜索",
+      "htmlSrc": "pages/search.html",
+      "pageIndex": 4,
+      "pageType": "task-driven",
+      "viewportMode": "document-scroll",
+      "businessScenario": "Search by license plate with history list and accumulated debt total",
+      "visualNorthStar": "Clean search-first interface with results showing complete transaction history per vehicle",
+      "mobileNavigationApplies": true,
+      "mobileNavigationActiveKey": "search"
+    }
+  ],
+  "wiringPlan": [],
+  "hiddenInteractionPlan": [
+    {"sourceNodeId": "page-home", "domId": "nav-home", "targetPageId": "page-home", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-home", "domId": "nav-add-record", "targetPageId": "page-add-record", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-home", "domId": "nav-debts", "targetPageId": "page-debts", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-home", "domId": "nav-search", "targetPageId": "page-search", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-add-record", "domId": "nav-home", "targetPageId": "page-home", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-add-record", "domId": "nav-add-record", "targetPageId": "page-add-record", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-add-record", "domId": "nav-debts", "targetPageId": "page-debts", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-add-record", "domId": "nav-search", "targetPageId": "page-search", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-debts", "domId": "nav-home", "targetPageId": "page-home", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-debts", "domId": "nav-add-record", "targetPageId": "page-add-record", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-debts", "domId": "nav-debts", "targetPageId": "page-debts", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-debts", "domId": "nav-search", "targetPageId": "page-search", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-search", "domId": "nav-home", "targetPageId": "page-home", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-search", "domId": "nav-add-record", "targetPageId": "page-add-record", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-search", "domId": "nav-debts", "targetPageId": "page-debts", "hideEdge": true, "reason": "tab navigation"},
+    {"sourceNodeId": "page-search", "domId": "nav-search", "targetPageId": "page-search", "hideEdge": true, "reason": "tab navigation"}
+  ]
+}

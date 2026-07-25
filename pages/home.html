@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页汇总</title>
+    <style id="theme-vars">
+:root {
+  --tire-background: #111318;
+  --tire-foreground: #f0f0f5;
+  --tire-card: #1a1d25;
+  --tire-card-foreground: #f0f0f5;
+  --tire-popover: #22252e;
+  --tire-popover-foreground: #f0f0f5;
+  --tire-primary: #f97316;
+  --tire-primary-foreground: #ffffff;
+  --tire-muted: #272a35;
+  --tire-muted-foreground: #9ca3af;
+  --tire-border: #2d3140;
+  --tire-input: #1e2130;
+  --tire-ring: #f97316;
+  --tire-radius-sm: 6px;
+  --tire-radius-md: 10px;
+  --tire-radius-lg: 16px;
+  --tire-state-success: #22c55e;
+  --tire-state-warning: #eab308;
+  --tire-state-error: #ef4444;
+  --tire-state-info: #3b82f6;
+}
+
+/* Semantic token fallback */
+*, *::before, *::after {
+  --background: var(--tire-background);
+  --foreground: var(--tire-foreground);
+  --card: var(--tire-card);
+  --card-foreground: var(--tire-card-foreground);
+  --popover: var(--tire-popover);
+  --popover-foreground: var(--tire-popover-foreground);
+  --primary: var(--tire-primary);
+  --primary-foreground: var(--tire-primary-foreground);
+  --muted: var(--tire-muted);
+  --muted-foreground: var(--tire-muted-foreground);
+  --border: var(--tire-border);
+  --input: var(--tire-input);
+  --ring: var(--tire-ring);
+  --radius-sm: var(--tire-radius-sm);
+  --radius-md: var(--tire-radius-md);
+  --radius-lg: var(--tire-radius-lg);
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--tire-background);
+  color: var(--tire-foreground);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1 { font-size: 1.75rem; font-weight: 700; line-height: 1.3; }
+h2 { font-size: 1.375rem; font-weight: 600; line-height: 1.35; }
+h3 { font-size: 1.125rem; font-weight: 600; line-height: 1.4; }
+
+/* Safe area for iPhone notch */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--tire-background);
+    --color-foreground: var(--tire-foreground);
+    --color-card: var(--tire-card);
+    --color-card-foreground: var(--tire-card-foreground);
+    --color-popover: var(--tire-popover);
+    --color-popover-foreground: var(--tire-popover-foreground);
+    --color-primary: var(--tire-primary);
+    --color-primary-foreground: var(--tire-primary-foreground);
+    --color-muted: var(--tire-muted);
+    --color-muted-foreground: var(--tire-muted-foreground);
+    --color-border: var(--tire-border);
+    --color-input: var(--tire-input);
+    --color-ring: var(--tire-ring);
+    --radius-sm: var(--tire-radius-sm);
+    --radius-md: var(--tire-radius-md);
+    --radius-lg: var(--tire-radius-lg);
+  }
+  @layer base {
+    body { background: var(--tire-background); color: var(--tire-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--tire-background); }
+      .text-background { color: var(--tire-background); }
+      .border-background { border-color: var(--tire-background); }
+      .ring-background { --tw-ring-color: var(--tire-background); }
+      .bg-foreground { background-color: var(--tire-foreground); }
+      .text-foreground { color: var(--tire-foreground); }
+      .border-foreground { border-color: var(--tire-foreground); }
+      .ring-foreground { --tw-ring-color: var(--tire-foreground); }
+      .bg-card { background-color: var(--tire-card); }
+      .text-card { color: var(--tire-card); }
+      .border-card { border-color: var(--tire-card); }
+      .ring-card { --tw-ring-color: var(--tire-card); }
+      .bg-card-foreground { background-color: var(--tire-card-foreground); }
+      .text-card-foreground { color: var(--tire-card-foreground); }
+      .border-card-foreground { border-color: var(--tire-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--tire-card-foreground); }
+      .bg-popover { background-color: var(--tire-popover); }
+      .text-popover { color: var(--tire-popover); }
+      .border-popover { border-color: var(--tire-popover); }
+      .ring-popover { --tw-ring-color: var(--tire-popover); }
+      .bg-popover-foreground { background-color: var(--tire-popover-foreground); }
+      .text-popover-foreground { color: var(--tire-popover-foreground); }
+      .border-popover-foreground { border-color: var(--tire-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--tire-popover-foreground); }
+      .bg-primary { background-color: var(--tire-primary); }
+      .text-primary { color: var(--tire-primary); }
+      .border-primary { border-color: var(--tire-primary); }
+      .ring-primary { --tw-ring-color: var(--tire-primary); }
+      .bg-primary-foreground { background-color: var(--tire-primary-foreground); }
+      .text-primary-foreground { color: var(--tire-primary-foreground); }
+      .border-primary-foreground { border-color: var(--tire-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--tire-primary-foreground); }
+      .bg-muted { background-color: var(--tire-muted); }
+      .text-muted { color: var(--tire-muted); }
+      .border-muted { border-color: var(--tire-muted); }
+      .ring-muted { --tw-ring-color: var(--tire-muted); }
+      .bg-muted-foreground { background-color: var(--tire-muted-foreground); }
+      .text-muted-foreground { color: var(--tire-muted-foreground); }
+      .border-muted-foreground { border-color: var(--tire-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--tire-muted-foreground); }
+      .bg-border { background-color: var(--tire-border); }
+      .text-border { color: var(--tire-border); }
+      .border-border { border-color: var(--tire-border); }
+      .ring-border { --tw-ring-color: var(--tire-border); }
+      .bg-input { background-color: var(--tire-input); }
+      .text-input { color: var(--tire-input); }
+      .border-input { border-color: var(--tire-input); }
+      .ring-input { --tw-ring-color: var(--tire-input); }
+      .bg-ring { background-color: var(--tire-ring); }
+      .text-ring { color: var(--tire-ring); }
+      .border-ring { border-color: var(--tire-ring); }
+      .ring-ring { --tw-ring-color: var(--tire-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+
+      /* Date picker modal overlay */
+      .date-picker-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+        background: rgba(0,0,0,0.6);
+      }
+      .date-picker-overlay.active {
+        display: flex;
+      }
+      .date-picker-panel {
+        background: var(--tire-card);
+        border-radius: var(--tire-radius-lg) var(--tire-radius-lg) 0 0;
+        width: 100%;
+        max-width: 448px;
+        padding: 20px 16px 32px;
+        animation: slideUp 0.25s ease-out;
+      }
+      @keyframes slideUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+      .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 4px;
+        text-align: center;
+      }
+      .cal-day {
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 14px;
+        cursor: pointer;
+        color: var(--tire-foreground);
+        transition: all 0.15s;
+      }
+      .cal-day:hover { background: var(--tire-muted); }
+      .cal-day.today { border: 2px solid var(--tire-primary); }
+      .cal-day.selected { background: var(--tire-primary); color: #fff; }
+      .cal-day.has-records::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--tire-primary);
+      }
+      .cal-day { position: relative; }
+      .cal-day.empty { cursor: default; }
+      .cal-day.empty:hover { background: transparent; }
+      .cal-header-day {
+        font-size: 12px;
+        color: var(--tire-muted-foreground);
+        width: 36px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Day section expand/collapse */
+      .day-detail { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .day-detail.expanded { max-height: 2000px; }
+      .day-chevron { transition: transform 0.2s; }
+      .day-chevron.rotated { transform: rotate(90deg); }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <main class="pb-20 px-4 pt-4 max-w-md mx-auto">
+      <!-- Header: Title + View Toggle -->
+      <header class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="wrench" class="w-5 h-5 shrink-0 text-[var(--tire-primary)]"></i>
+          <h1 class="text-lg font-bold truncate">轮胎修补记账</h1>
+        </div>
+        <button id="btn-export" class="shrink-0 inline-flex items-center gap-1.5 h-9 px-3 rounded-[var(--tire-radius-md)] border border-[var(--tire-border)] bg-[var(--tire-card)] text-[var(--tire-muted-foreground)] text-sm min-h-[44px]">
+          <i data-lucide="download" class="w-4 h-4 shrink-0"></i>
+          <span>导出</span>
+        </button>
+      </header>
+
+      <!-- View Toggle Tabs -->
+      <div class="flex rounded-[var(--tire-radius-lg)] overflow-hidden mb-4 border border-[var(--tire-border)]">
+        <button id="btn-view-daily" class="flex-1 min-h-[42px] flex items-center justify-center text-sm font-semibold bg-[var(--tire-primary)] text-white transition-colors">按日查看</button>
+        <button id="btn-view-monthly" class="flex-1 min-h-[42px] flex items-center justify-center text-sm font-semibold bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] transition-colors">本月汇总</button>
+      </div>
+
+      <!-- ========== DAILY VIEW ========== -->
+      <div id="view-daily">
+        <!-- Date Navigator -->
+        <div class="flex items-center justify-between mb-4">
+          <button id="btn-prev-day" class="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--tire-muted)] text-[var(--tire-foreground)] min-h-[44px] min-w-[44px]">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <button id="btn-date-picker" class="flex items-center gap-2 px-4 py-2 rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] min-h-[44px]">
+            <i data-lucide="calendar" class="w-4 h-4 text-[var(--tire-primary)]"></i>
+            <span id="selected-date-label" class="text-sm font-semibold"></span>
+            <i data-lucide="chevron-down" class="w-4 h-4 text-[var(--tire-muted-foreground)]"></i>
+          </button>
+          <button id="btn-next-day" class="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--tire-muted)] text-[var(--tire-foreground)] min-h-[44px] min-w-[44px]">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Selected Day Summary Card -->
+        <div id="day-summary-card" class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-4 mb-4">
+          <div class="flex items-center justify-between mb-3">
+            <h2 id="day-summary-title" class="text-base font-semibold"></h2>
+            <span id="day-summary-count" class="text-xs text-[var(--tire-muted-foreground)]"></span>
+          </div>
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <p class="text-xs text-[var(--tire-muted-foreground)] mb-1">收入</p>
+              <p id="day-income" class="text-lg font-bold" style="color:var(--tire-state-success);">0.00</p>
+            </div>
+            <div>
+              <p class="text-xs text-[var(--tire-muted-foreground)] mb-1">支出</p>
+              <p id="day-expense" class="text-lg font-bold text-[var(--tire-foreground)]">0.00</p>
+            </div>
+            <div>
+              <p class="text-xs text-[var(--tire-muted-foreground)] mb-1">挂账</p>
+              <p id="day-pending" class="text-lg font-bold" style="color:var(--tire-state-error);">0.00</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selected Day Records -->
+        <div id="day-records" class="flex flex-col gap-2 mb-4">
+          <!-- rendered by JS -->
+        </div>
+
+        <!-- Timeline: Other days this month -->
+        <div class="mt-2 mb-2">
+          <h3 class="text-sm font-semibold text-[var(--tire-muted-foreground)] mb-2">本月其他日期</h3>
+        </div>
+        <div id="timeline-days" class="flex flex-col gap-2">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+
+      <!-- ========== MONTHLY VIEW ========== -->
+      <div id="view-monthly" class="hidden">
+        <!-- Month Selector -->
+        <div class="flex items-center justify-between mb-4">
+          <button id="btn-prev-month" class="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--tire-muted)] text-[var(--tire-foreground)] min-h-[44px] min-w-[44px]">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <div class="flex items-center gap-2 px-4 py-2 rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)]">
+            <i data-lucide="calendar-days" class="w-4 h-4 text-[var(--tire-primary)]"></i>
+            <span id="month-label" class="text-sm font-semibold"></span>
+          </div>
+          <button id="btn-next-month" class="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-[var(--tire-muted)] text-[var(--tire-foreground)] min-h-[44px] min-w-[44px]">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Monthly KPI Cards -->
+        <section class="grid grid-cols-2 gap-3 mb-3" aria-label="本月汇总">
+          <div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-3">
+            <p class="text-xs text-[var(--tire-muted-foreground)] truncate mb-1">本月实收</p>
+            <p id="kpi-income" class="text-2xl font-bold whitespace-nowrap" style="color: var(--tire-state-success);">0.00</p>
+          </div>
+          <div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-3">
+            <p class="text-xs text-[var(--tire-muted-foreground)] truncate mb-1">本月挂账</p>
+            <p id="kpi-pending" class="text-2xl font-bold whitespace-nowrap" style="color: var(--tire-state-error);">0.00</p>
+          </div>
+          <div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-3">
+            <p class="text-xs text-[var(--tire-muted-foreground)] truncate mb-1">工作成本</p>
+            <p id="kpi-work-cost" class="text-2xl font-bold whitespace-nowrap text-[var(--tire-foreground)]">0.00</p>
+          </div>
+          <div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-3">
+            <p class="text-xs text-[var(--tire-muted-foreground)] truncate mb-1">净利润</p>
+            <p id="kpi-net-profit" class="text-2xl font-bold whitespace-nowrap text-[var(--tire-foreground)]">0.00</p>
+          </div>
+        </section>
+
+        <!-- Monthly Living Expense -->
+        <div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-3 mb-4">
+          <div class="flex items-center justify-between">
+            <p class="text-xs text-[var(--tire-muted-foreground)] truncate">本月生活支出</p>
+            <p id="kpi-living" class="text-lg font-bold whitespace-nowrap text-[var(--tire-foreground)]">0.00</p>
+          </div>
+        </div>
+
+        <!-- Monthly Daily Breakdown -->
+        <h3 class="text-sm font-semibold text-[var(--tire-muted-foreground)] mb-2">每日明细</h3>
+        <div id="monthly-timeline" class="flex flex-col gap-2">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Date Picker Modal -->
+    <div id="date-picker-overlay" class="date-picker-overlay">
+      <div class="date-picker-panel">
+        <div class="flex items-center justify-between mb-4">
+          <button id="cal-prev-month" class="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--tire-muted)] min-h-[44px] min-w-[44px]">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <span id="cal-month-label" class="text-sm font-semibold"></span>
+          <button id="cal-next-month" class="w-9 h-9 flex items-center justify-center rounded-full bg-[var(--tire-muted)] min-h-[44px] min-w-[44px]">
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+        <div class="cal-grid mb-1">
+          <span class="cal-header-day">日</span>
+          <span class="cal-header-day">一</span>
+          <span class="cal-header-day">二</span>
+          <span class="cal-header-day">三</span>
+          <span class="cal-header-day">四</span>
+          <span class="cal-header-day">五</span>
+          <span class="cal-header-day">六</span>
+        </div>
+        <div id="cal-grid" class="cal-grid">
+          <!-- rendered by JS -->
+        </div>
+        <button id="cal-today-btn" class="mt-4 w-full py-2.5 rounded-[var(--tire-radius-md)] bg-[var(--tire-primary)] text-white text-sm font-semibold min-h-[44px]">回到今天</button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav data-mobile-nav="global" class="fixed bottom-0 left-0 right-0 h-16 bg-[var(--tire-card)] border-t border-[var(--tire-border)] z-50">
+      <div class="w-full max-w-md mx-auto grid grid-cols-4 h-full">
+        <a href="home.html" data-nav-key="home" data-active="true" data-dom-id="nav-home" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-primary)]">
+          <i data-lucide="layout-dashboard" class="w-5 h-5 shrink-0"></i>
+          <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">首页</span>
+        </a>
+        <a href="add-record.html" data-nav-key="add-record" data-dom-id="nav-add-record" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+          <i data-lucide="plus-circle" class="w-5 h-5 shrink-0"></i>
+          <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">记账</span>
+        </a>
+        <a href="debts.html" data-nav-key="debts" data-dom-id="nav-debts" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+          <i data-lucide="file-text" class="w-5 h-5 shrink-0"></i>
+          <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">欠款</span>
+        </a>
+        <a href="search.html" data-nav-key="search" data-dom-id="nav-search" class="min-w-0 flex flex-col items-center justify-center gap-0.5 px-1 h-full text-[var(--tire-muted-foreground)]">
+          <i data-lucide="search" class="w-5 h-5 shrink-0"></i>
+          <span class="text-[11px] leading-none whitespace-nowrap max-w-full truncate">搜索</span>
+        </a>
+      </div>
+    </nav>
+
+    <script>
+    (function() {
+      var now = new Date();
+      var selectedDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      var calViewDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+      var currentViewMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      var currentView = 'daily';
+
+      var weekDayNames = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+      var workCategories = ['新胎购买', '修补材料', '工具', '救援油费'];
+      var livingCategories = ['加油', '吃饭', '转账红包', '零食', '水电燃气'];
+
+      function getRecords() {
+        try {
+          var raw = localStorage.getItem('tire_records');
+          if (raw) return JSON.parse(raw);
+        } catch(e) {}
+        return null;
+      }
+
+      function formatMoney(n) {
+        return n.toFixed(2);
+      }
+
+      function dateKey(d) {
+        return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      }
+
+      function getRecordsForDate(records, d) {
+        var key = dateKey(d);
+        return records.filter(function(r) { return r.date && r.date.startsWith(key); });
+      }
+
+      function getMonthRecords(records, year, month) {
+        if (!records || !records.length) return [];
+        var prefix = year + '-' + String(month).padStart(2, '0');
+        return records.filter(function(r) { return r.date && r.date.startsWith(prefix); });
+      }
+
+      function calcDaySummary(dayRecords) {
+        var income = 0, expense = 0, pending = 0;
+        dayRecords.forEach(function(r) {
+          var amt = parseFloat(r.amount) || 0;
+          if (r.type === 'income') {
+            if (r.paymentStatus === 'settled') income += amt;
+            else pending += amt;
+          } else if (r.type === 'expense') {
+            expense += amt;
+          }
+        });
+        return { income: income, expense: expense, pending: pending, count: dayRecords.length };
+      }
+
+      function calcMonthKPI(records) {
+        var income = 0, pending = 0, workCost = 0, livingCost = 0;
+        records.forEach(function(r) {
+          var amt = parseFloat(r.amount) || 0;
+          if (r.type === 'income') {
+            if (r.paymentStatus === 'settled') income += amt;
+            else pending += amt;
+          } else if (r.type === 'expense') {
+            if (r.expenseType === 'work') workCost += amt;
+            else livingCost += amt;
+          }
+        });
+        var net = income - workCost;
+        return { income: income, pending: pending, workCost: workCost, livingCost: livingCost, net: net };
+      }
+
+      function formatTime(dateStr) {
+        if (!dateStr) return '';
+        var d = new Date(dateStr);
+        return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+      }
+
+      // ===== View Toggle =====
+      var btnDaily = document.getElementById('btn-view-daily');
+      var btnMonthly = document.getElementById('btn-view-monthly');
+      var viewDaily = document.getElementById('view-daily');
+      var viewMonthly = document.getElementById('view-monthly');
+
+      btnDaily.addEventListener('click', function() {
+        currentView = 'daily';
+        btnDaily.className = 'flex-1 min-h-[42px] flex items-center justify-center text-sm font-semibold bg-[var(--tire-primary)] text-white transition-colors';
+        btnMonthly.className = 'flex-1 min-h-[42px] flex items-center justify-center text-sm font-semibold bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] transition-colors';
+        viewDaily.classList.remove('hidden');
+        viewMonthly.classList.add('hidden');
+        refreshDailyView();
+      });
+
+      btnMonthly.addEventListener('click', function() {
+        currentView = 'monthly';
+        btnMonthly.className = 'flex-1 min-h-[42px] flex items-center justify-center text-sm font-semibold bg-[var(--tire-primary)] text-white transition-colors';
+        btnDaily.className = 'flex-1 min-h-[42px] flex items-center justify-center text-sm font-semibold bg-[var(--tire-muted)] text-[var(--tire-muted-foreground)] transition-colors';
+        viewMonthly.classList.remove('hidden');
+        viewDaily.classList.add('hidden');
+        refreshMonthlyView();
+      });
+
+      // ===== Date Navigator (Daily View) =====
+      document.getElementById('btn-prev-day').addEventListener('click', function() {
+        selectedDate.setDate(selectedDate.getDate() - 1);
+        refreshDailyView();
+      });
+
+      document.getElementById('btn-next-day').addEventListener('click', function() {
+        selectedDate.setDate(selectedDate.getDate() + 1);
+        refreshDailyView();
+      });
+
+      // ===== Month Navigator (Monthly View) =====
+      document.getElementById('btn-prev-month').addEventListener('click', function() {
+        currentViewMonth.setMonth(currentViewMonth.getMonth() - 1);
+        refreshMonthlyView();
+      });
+
+      document.getElementById('btn-next-month').addEventListener('click', function() {
+        currentViewMonth.setMonth(currentViewMonth.getMonth() + 1);
+        refreshMonthlyView();
+      });
+
+      // ===== Date Picker =====
+      var pickerOverlay = document.getElementById('date-picker-overlay');
+      document.getElementById('btn-date-picker').addEventListener('click', function() {
+        calViewDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        renderCalendar();
+        pickerOverlay.classList.add('active');
+      });
+
+      pickerOverlay.addEventListener('click', function(e) {
+        if (e.target === pickerOverlay) pickerOverlay.classList.remove('active');
+      });
+
+      document.getElementById('cal-prev-month').addEventListener('click', function() {
+        calViewDate.setMonth(calViewDate.getMonth() - 1);
+        renderCalendar();
+      });
+
+      document.getElementById('cal-next-month').addEventListener('click', function() {
+        calViewDate.setMonth(calViewDate.getMonth() + 1);
+        renderCalendar();
+      });
+
+      document.getElementById('cal-today-btn').addEventListener('click', function() {
+        selectedDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        calViewDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        renderCalendar();
+        refreshDailyView();
+        pickerOverlay.classList.remove('active');
+      });
+
+      function renderCalendar() {
+        var records = getRecords();
+        var y = calViewDate.getFullYear();
+        var m = calViewDate.getMonth();
+        document.getElementById('cal-month-label').textContent = y + '年' + (m + 1) + '月';
+
+        var firstDay = new Date(y, m, 1).getDay();
+        var daysInMonth = new Date(y, m + 1, 0).getDate();
+        var grid = document.getElementById('cal-grid');
+        var html = '';
+
+        // Empty cells for days before 1st
+        for (var i = 0; i < firstDay; i++) {
+          html += '<span class="cal-day empty"></span>';
+        }
+
+        for (var d = 1; d <= daysInMonth; d++) {
+          var thisDate = new Date(y, m, d);
+          var key = dateKey(thisDate);
+          var hasRecs = records && records.some(function(r) { return r.date && r.date.startsWith(key); });
+          var isToday = (y === now.getFullYear() && m === now.getMonth() && d === now.getDate());
+          var isSelected = (y === selectedDate.getFullYear() && m === selectedDate.getMonth() && d === selectedDate.getDate());
+
+          var cls = 'cal-day';
+          if (isToday) cls += ' today';
+          if (isSelected) cls += ' selected';
+          if (hasRecs) cls += ' has-records';
+
+          html += '<span class="' + cls + '" data-cal-day="' + d + '">' + d + '</span>';
+        }
+
+        grid.innerHTML = html;
+
+        // Click handlers
+        grid.querySelectorAll('[data-cal-day]').forEach(function(el) {
+          el.addEventListener('click', function() {
+            var day = parseInt(this.getAttribute('data-cal-day'));
+            selectedDate = new Date(y, m, day);
+            pickerOverlay.classList.remove('active');
+            if (currentView === 'daily') {
+              refreshDailyView();
+            } else {
+              currentViewMonth = new Date(y, m, 1);
+              refreshMonthlyView();
+            }
+          });
+        });
+
+        lucide.createIcons();
+      }
+
+      // ===== Render Daily View =====
+      function refreshDailyView() {
+        var records = getRecords();
+        var y = selectedDate.getFullYear();
+        var m = selectedDate.getMonth() + 1;
+        var d = selectedDate.getDate();
+        var dayStr = m + '月' + d + '日 ' + weekDayNames[selectedDate.getDay()];
+
+        document.getElementById('selected-date-label').textContent = y + '年' + m + '月' + d + '日';
+
+        var dayRecords = getRecordsForDate(records || [], selectedDate);
+        var summary = calcDaySummary(dayRecords);
+
+        document.getElementById('day-summary-title').textContent = dayStr;
+        document.getElementById('day-summary-count').textContent = summary.count > 0 ? summary.count + '笔记录' : '无记录';
+        document.getElementById('day-income').textContent = formatMoney(summary.income);
+        document.getElementById('day-expense').textContent = formatMoney(summary.expense);
+        document.getElementById('day-pending').textContent = formatMoney(summary.pending);
+
+        // Render day records
+        var dayRecordsEl = document.getElementById('day-records');
+        if (dayRecords.length === 0) {
+          dayRecordsEl.innerHTML = '<div class="text-center text-sm text-[var(--tire-muted-foreground)] py-6">当天暂无记录</div>';
+        } else {
+          var sorted = dayRecords.slice().sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+          dayRecordsEl.innerHTML = sorted.map(function(r) { return renderRecordItem(r); }).join('');
+        }
+
+        // Render timeline for other days this month
+        renderTimelineDays(records || [], y, m, d);
+
+        lucide.createIcons();
+      }
+
+      function renderRecordItem(r) {
+        var isIncome = r.type === 'income';
+        var iconCls = isIncome ? 'arrow-up-circle' : 'arrow-down-circle';
+        var amtColor = isIncome ? 'color:var(--tire-state-success)' : 'color:var(--tire-state-error)';
+        var amtPrefix = isIncome ? '+' : '-';
+        var vehicleInfo = '';
+        if (isIncome && r.vehicle) vehicleInfo = '<span class="truncate">' + r.vehicle + '</span>';
+        var statusBadge = '';
+        if (isIncome && r.paymentStatus === 'settled') {
+          statusBadge = '<span class="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] whitespace-nowrap" style="background:var(--tire-state-success);color:var(--tire-primary-foreground);">已结清</span>';
+        } else if (isIncome && r.paymentStatus === 'pending') {
+          statusBadge = '<span class="shrink-0 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] whitespace-nowrap" style="background:var(--tire-state-error);color:var(--tire-primary-foreground);">挂账</span>';
+        }
+
+        return '<div class="flex items-center gap-3 rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] p-3 min-h-[44px]">' +
+          '<i data-lucide="' + iconCls + '" class="w-5 h-5 shrink-0" style="' + amtColor + '"></i>' +
+          '<div class="min-w-0 flex-1">' +
+            '<div class="flex items-center gap-1.5">' +
+              '<span class="text-sm font-medium truncate">' + (r.category || '') + '</span>' +
+              (vehicleInfo ? '<span class="text-xs text-[var(--tire-muted-foreground)] truncate">' + r.vehicle + '</span>' : '') +
+              statusBadge +
+            '</div>' +
+            '<p class="text-xs text-[var(--tire-muted-foreground)] truncate mt-0.5">' + formatTime(r.date) + (r.note ? ' · ' + r.note : '') + '</p>' +
+          '</div>' +
+          '<span class="shrink-0 text-sm font-bold whitespace-nowrap" style="' + amtColor + '">' + amtPrefix + formatMoney(parseFloat(r.amount) || 0) + '</span>' +
+        '</div>';
+      }
+
+      function renderTimelineDays(records, year, month, selectedDay) {
+        var container = document.getElementById('timeline-days');
+        var monthRecs = getMonthRecords(records, year, month);
+
+        // Group by date
+        var dayMap = {};
+        monthRecs.forEach(function(r) {
+          var d = new Date(r.date).getDate();
+          if (!dayMap[d]) dayMap[d] = [];
+          dayMap[d].push(r);
+        });
+
+        // Get days sorted descending, excluding selected day
+        var days = Object.keys(dayMap).map(Number).sort(function(a, b) { return b - a; }).filter(function(d) { return d !== selectedDay; });
+
+        if (days.length === 0) {
+          container.innerHTML = '<div class="text-center text-sm text-[var(--tire-muted-foreground)] py-4">本月暂无其他记录</div>';
+          return;
+        }
+
+        container.innerHTML = days.map(function(day) {
+          var recs = dayMap[day];
+          var summary = calcDaySummary(recs);
+          var dateObj = new Date(year, month - 1, day);
+          var label = month + '月' + day + '日 ' + weekDayNames[dateObj.getDay()];
+          var uid = 'timeline-' + day;
+
+          return '<div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] overflow-hidden">' +
+            '<button class="timeline-day-btn w-full flex items-center justify-between p-3 min-h-[44px]" data-target="' + uid + '">' +
+              '<div class="min-w-0 flex-1 text-left">' +
+                '<div class="flex items-center gap-2">' +
+                  '<span class="text-sm font-semibold truncate">' + label + '</span>' +
+                  '<span class="text-xs text-[var(--tire-muted-foreground)]">' + summary.count + '笔</span>' +
+                '</div>' +
+                '<div class="flex items-center gap-3 mt-0.5">' +
+                  '<span class="text-xs" style="color:var(--tire-state-success);">+' + formatMoney(summary.income) + '</span>' +
+                  '<span class="text-xs text-[var(--tire-muted-foreground)]">-' + formatMoney(summary.expense) + '</span>' +
+                  (summary.pending > 0 ? '<span class="text-xs" style="color:var(--tire-state-error);">挂 ' + formatMoney(summary.pending) + '</span>' : '') +
+                '</div>' +
+              '</div>' +
+              '<i data-lucide="chevron-right" class="w-4 h-4 shrink-0 text-[var(--tire-muted-foreground)] day-chevron"></i>' +
+            '</button>' +
+            '<div id="' + uid + '" class="day-detail">' +
+              '<div class="px-3 pb-3 flex flex-col gap-1.5">' +
+                recs.sort(function(a, b) { return new Date(b.date) - new Date(a.date); }).map(function(r) { return renderRecordItem(r); }).join('') +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      // Timeline expand/collapse
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.timeline-day-btn');
+        if (!btn) return;
+        var targetId = btn.getAttribute('data-target');
+        var detail = document.getElementById(targetId);
+        if (!detail) return;
+        var chevron = btn.querySelector('.day-chevron');
+        detail.classList.toggle('expanded');
+        if (chevron) chevron.classList.toggle('rotated');
+      });
+
+      // ===== Render Monthly View =====
+      function refreshMonthlyView() {
+        var records = getRecords();
+        var y = currentViewMonth.getFullYear();
+        var m = currentViewMonth.getMonth() + 1;
+
+        document.getElementById('month-label').textContent = y + '年' + m + '月';
+
+        var monthRecs = getMonthRecords(records || [], y, m);
+        var kpi = calcMonthKPI(monthRecs);
+
+        document.getElementById('kpi-income').textContent = formatMoney(kpi.income);
+        document.getElementById('kpi-pending').textContent = formatMoney(kpi.pending);
+        document.getElementById('kpi-work-cost').textContent = formatMoney(kpi.workCost);
+        var netEl = document.getElementById('kpi-net-profit');
+        netEl.textContent = formatMoney(kpi.net);
+        netEl.style.color = kpi.net >= 0 ? 'var(--tire-state-success)' : 'var(--tire-state-error)';
+        document.getElementById('kpi-living').textContent = formatMoney(kpi.livingCost);
+
+        // Render daily breakdown for the month
+        var container = document.getElementById('monthly-timeline');
+        var dayMap = {};
+        monthRecs.forEach(function(r) {
+          var d = new Date(r.date).getDate();
+          if (!dayMap[d]) dayMap[d] = [];
+          dayMap[d].push(r);
+        });
+
+        var days = Object.keys(dayMap).map(Number).sort(function(a, b) { return b - a; });
+
+        if (days.length === 0) {
+          container.innerHTML = '<div class="text-center text-sm text-[var(--tire-muted-foreground)] py-8">本月暂无记录</div>';
+          lucide.createIcons();
+          return;
+        }
+
+        container.innerHTML = days.map(function(day) {
+          var recs = dayMap[day];
+          var summary = calcDaySummary(recs);
+          var dateObj = new Date(y, m - 1, day);
+          var label = m + '月' + day + '日 ' + weekDayNames[dateObj.getDay()];
+          var uid = 'monthly-tl-' + day;
+
+          return '<div class="rounded-[var(--tire-radius-md)] bg-[var(--tire-card)] border border-[var(--tire-border)] overflow-hidden">' +
+            '<button class="timeline-day-btn w-full flex items-center justify-between p-3 min-h-[44px]" data-target="' + uid + '">' +
+              '<div class="min-w-0 flex-1 text-left">' +
+                '<div class="flex items-center gap-2">' +
+                  '<span class="text-sm font-semibold truncate">' + label + '</span>' +
+                  '<span class="text-xs text-[var(--tire-muted-foreground)]">' + summary.count + '笔</span>' +
+                '</div>' +
+                '<div class="flex items-center gap-3 mt-0.5">' +
+                  '<span class="text-xs" style="color:var(--tire-state-success);">+' + formatMoney(summary.income) + '</span>' +
+                  '<span class="text-xs text-[var(--tire-muted-foreground)]">-' + formatMoney(summary.expense) + '</span>' +
+                  (summary.pending > 0 ? '<span class="text-xs" style="color:var(--tire-state-error);">挂 ' + formatMoney(summary.pending) + '</span>' : '') +
+                '</div>' +
+              '</div>' +
+              '<i data-lucide="chevron-right" class="w-4 h-4 shrink-0 text-[var(--tire-muted-foreground)] day-chevron"></i>' +
+            '</button>' +
+            '<div id="' + uid + '" class="day-detail">' +
+              '<div class="px-3 pb-3 flex flex-col gap-1.5">' +
+                recs.sort(function(a, b) { return new Date(b.date) - new Date(a.date); }).map(function(r) { return renderRecordItem(r); }).join('') +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+
+        lucide.createIcons();
+      }
+
+      // ===== Export =====
+      function exportData() {
+        var records = getRecords();
+        var data = records ? records : [];
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        var y = selectedDate.getFullYear();
+        var m = String(selectedDate.getMonth() + 1).padStart(2, '0');
+        a.download = 'tire_records_' + y + m + '.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      document.getElementById('btn-export').addEventListener('click', exportData);
+
+      // ===== Init =====
+      refreshDailyView();
+      lucide.createIcons();
+    })();
+    </script>
+    <script>
+    // Register Service Worker for offline support
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function() {});
+    }
+    </script>
+</body>
+</html>
