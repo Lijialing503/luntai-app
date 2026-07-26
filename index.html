@@ -10,12 +10,12 @@
     <title>轮胎修补记账</title>
     <script>
         // Redirect to home page
-        window.location.replace('/pages/home.html');
+        window.location.replace('./pages/home.html');
     </script>
     <script>
         // Register Service Worker for offline support
         if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('/sw.js').catch(function() {});
+          navigator.serviceWorker.register('./sw.js').catch(function() {});
         }
     </script>
 </head>
